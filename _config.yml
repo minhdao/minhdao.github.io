@@ -14,7 +14,7 @@ default_img:
 
 # Profile settings
 name: Minh Dao
-profile_img: https://picsum.photos/2000/1200/?random
+profile_img: /assets/pics/me.jpg
 profile: Minh is into web development and crypto currency. Living in Ho Chi Minh City, Viet Nam. All time learner and player :)
 social:
   github: https://github.com/minhdao
