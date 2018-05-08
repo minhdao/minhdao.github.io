@@ -14,7 +14,7 @@ default_img:
 
 # Profile settings
 name: Minh Dao
-profile_img: https://www.instagram.com/p/BhHQ7oFBoM_Np07m-LBEBQk_ihrcDh1FCfKO2U0/?taken-by=minhdao6
+profile_img: ./Images/me.jpg
 profile: Minh is into web development and crypto currency. Living in Ho Chi Minh City, Viet Nam. All time learner and player :)
 social:
   github: https://github.com/minhdao
