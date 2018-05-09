@@ -41,9 +41,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  jekyll (~> 3.1)
   jekyll-paginate
   jekyll-sitemap
   octopress-autoprefixer
 
 BUNDLED WITH
-   1.10.6
+   1.16.1
