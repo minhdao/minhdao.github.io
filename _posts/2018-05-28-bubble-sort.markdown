@@ -20,7 +20,7 @@ The divine rule is lighter elements should rise before the heavier ones.
 
 A divine scale is your tool complete these tasks.
 
-Sorting an array with random numbers is one good way to demonstrate bubble sort.
+Sorting an array with random numbers representing bubbles with different weights is one good way to demonstrate bubble sort.
 
 Given an array of numbers:
 `[4, 2, 12, 5, -1, 43, 0, 64, 65, 1, -3]`
