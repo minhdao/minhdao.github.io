@@ -45,12 +45,19 @@ After the first iteration through the array, the 'lightest' element will be at i
 
 The weighting process will continue through the steps:
 `[4, 2, 12, 5, -1, 43, 0, 64, -3, 65, 1]`
+
 `[4, 2, 12, 5, -1, 43, 0, -3, 64, 65, 1]`
+
 `[4, 2, 12, 5, -1, 43, -3, 0, 64, 65, 1]`
+
 `[4, 2, 12, 5, -1, -3, 43, 0, 64, 65, 1]`
+
 `[4, 2, 12, 5, -3, -1, 43, 0, 64, 65, 1]`
+
 `[4, 2, 12, -3, 5, -1, 43, 0, 64, 65, 1]`
+
 `[4, 2, -3, 12, 5, -1, 43, 0, 64, 65, 1]`
+
 `[4, -3, 2, 12, 5, -1, 43, 0, 64, 65, 1]`
 
 Finally, the lightest element is at the beginning (index 0) of the array.
