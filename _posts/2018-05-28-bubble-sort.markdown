@@ -5,8 +5,8 @@ date: 2018-05-28
 categories:
   - algorithm
 description:
-image: https://picsum.photos/2000/1200?image=678
-image-sm: https://picsum.photos/500/300?image=678
+image: https://picsum.photos/2000/1200?image=123
+image-sm: https://picsum.photos/500/300?image=123
 ---
 ### The Concepts
 
