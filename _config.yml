@@ -3,7 +3,6 @@ email: minhdao@gmail.com
 baseurl: ""
 paginate: 5
 paginate_path: "/blog/page-:num"
-category_dir: "category"
 google_analytics:
 
 # SEO settings
@@ -23,7 +22,7 @@ social:
   instagram: https://www.instagram.com/minhdao6/
 
 # Build settings
-include: ["_site/category"]
+include: ["category"]
 exclude: ["_screenshots", "Gemfile", "Gemfile.lock", "LICENSE.txt", "README.md"]
 markdown: kramdown
 permalink: /:year/:month/:day/:title/
