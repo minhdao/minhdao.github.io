@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>minh&#39;s notes</title>
+    <description>where my thoughts are</description>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 24 Mar 2019 17:29:33 +0700</pubDate>
+    <lastBuildDate>Sun, 24 Mar 2019 17:29:33 +0700</lastBuildDate>
+    <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>Reduce rework with Behavior Driven Development</title>
+        <description>&lt;p&gt;Feeling tired of redoing a same task many times? This post might help you.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-rememberable-friday&quot;&gt;A rememberable Friday&lt;/h2&gt;
+
+&lt;p&gt;It was a Friday morning and the end of a sprint too. I had already submitted my code for the second task the night before for review. Everything was chill and good. It seemed to be one of those productive weeks and I could “R.I.P” in the weekend.&lt;/p&gt;
+
+&lt;p&gt;It was about time for lunch when I recieved an urgent request from our front-end team to change a few things on the first task that I had already finished earlier on Tuesday. To my surprise, I asked myself “What could possibly go wrong?”.&lt;/p&gt;
+
+&lt;p&gt;The change request was to fix the format of the respond from the API I created earlier. Our front-end team could to parse the repond with out throwing some exception because some expected and required attributes had not been included in the respond. After some times trying to figure out why my respond could not be parsed, I learnt that &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; of the respond was expected to be UUID, and a &lt;code class=&quot;highlighter-rouge&quot;&gt;meta&lt;/code&gt; object with &lt;code class=&quot;highlighter-rouge&quot;&gt;total_pages&lt;/code&gt; attributes was also required in the respond.&lt;/p&gt;
+
+&lt;p&gt;“Why did’t you have these attributes correctly in the first place?” you might ask.&lt;/p&gt;
+
+&lt;p&gt;When I started working on my API, I looked at the respond from a few other APIs. The respond included &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; in the form of the UUID, and every respond has &lt;code class=&quot;highlighter-rouge&quot;&gt;meta&lt;/code&gt; attributes which included &lt;code class=&quot;highlighter-rouge&quot;&gt;total_pages&lt;/code&gt; used for pagination. The purpose the API I was working on was different from the previous APIs though, so I thought to myself, the respond could be different. Since this time our server would generate the &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;s, so there was no point using UUID. The data could always be returned in one page, so pagination could be removed.&lt;/p&gt;
+
+&lt;p&gt;With these thoughts in mind I could only see the pros they bring:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Table performance improvement since UUID was out of the picture&lt;/li&gt;
+  &lt;li&gt;Smaller code base with less complication and easier to maintain&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The only cons that I just discovered was:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Our front-end team could not use the API :)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;At this point I realized that the rest of the day was not going to be good because I had two unfinished task hanging over my head and only a few working hours left before weekend officially started. The stress and anxiety began to creep in. Everything turned from good to bad so quickly.&lt;/p&gt;
+
+&lt;p&gt;After a few hours of stress and help from my colleagues, I managed to fix the respond to fit our front-end team requirements. This time though, I did not forget to cross-check with them before submitting my code and calling it done with the task. However, the API could not finish on time to be deployed, so the customer could not use this feature maybe until the end of next week.&lt;/p&gt;
+
+&lt;p&gt;The task that I finished so early in the sprint came back and bit me on the leg. What I thought was a productive week turned out not so productive after all. Rework was definitely the silver bullet that kills productivity and I couldn’t help but wonder how to improve my workflow to stop the rework.&lt;/p&gt;
+
+&lt;p&gt;Search for a few minutes on the internet, I came accross an article about Behavior Driven Development a.k.a BDD. BDD was no stranger to me though. It was tought in one of the classes I took back in university, but … without any actual context. In order words, it didn’t make much sense to me back then. Having re-reading BDD after all the task rework I went through, the ideas and concepts of BDD finally make much more sense.&lt;/p&gt;
+
+&lt;h2 id=&quot;behavior-driven-development-aka-bdd&quot;&gt;Behavior Driven Development a.k.a BDD&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cucumber.io/&quot;&gt;cucumber.io&lt;/a&gt; has excellent resources on BDD. This section of the blog will be a summary of the info I managed to collect mainly on cucumber.io and some other articles.&lt;/p&gt;
+
+&lt;h3 id=&quot;bdd-overview&quot;&gt;BDD overview&lt;/h3&gt;
+
+&lt;p&gt;Behavior driven development is a set of pratices that aim to reduce wasteful activities in software development.&lt;/p&gt;
+
+&lt;p&gt;The most common wasteful activities are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Rework caused by misunderstood or vague requirements&lt;/li&gt;
+  &lt;li&gt;Technical debt caused by reluctance to refactor code&lt;/li&gt;
+  &lt;li&gt;Slow feedback cycles caused by silos and hand-overs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you already read through the ealier part of the blog, you might realize by now, the causes of my task rework were all among these wasteful activities :)&lt;/p&gt;
+
+&lt;p&gt;BBD aims to reduce these watseful activities by introducing practices that will narrow communication gaps, proster better understanding of the customers’ needs, and promote continuous communication. All of these are done around &lt;strong&gt;real word examples&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;BDD can be splited into two main parts:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Deliberate discovery&lt;/li&gt;
+  &lt;li&gt;Test driven development&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;deliberate-discovery&quot;&gt;Deliberate discovery&lt;/h3&gt;
+
+&lt;p&gt;A common reason for task rework is misunderstanding of how the feature should behave and what’s the problem we are trying to solve. We often assume how the feature should work and think in just our point of view. Because of this we only see our part in the play and how we want the feature to work. It’s easy to forget about other people and teams that also be work on the same feature. The worst part is we might also leave the customer, the one that actually uses the feature, completely out of the picture.&lt;/p&gt;
+
+&lt;p&gt;According to cucumber.io, it’s shown that teams which deliberately seek to discover what they are not clear about before starting development are more productive because there’s less rework. The most effective way to deliberately discover the ‘unknowns’ and ‘unclears’ is through effective converstaion between the stakeholders.&lt;/p&gt;
+
+&lt;p&gt;cucumber.io has a simple yet effective technique to help clearing out the ambiguity of requirements/stories called &lt;a href=&quot;https://cucumber.io/blog/example-mapping-introduction/&quot;&gt;&lt;strong&gt;Examples Mapping&lt;/strong&gt;&lt;/a&gt;. It’s just a short meeting (25 minutes max) which involve the stakeholders to have conversation about concrete examples of the requirement/stories that are going to be developed.&lt;/p&gt;
+
+&lt;h3 id=&quot;test-driven-development-aka-tdd&quot;&gt;Test Driven Development a.k.a TDD&lt;/h3&gt;
+
+&lt;p&gt;After all the requirements are clear and the team decides to move the task/story card to development, it’s time to write … &lt;strong&gt;tests&lt;/strong&gt;. TDD concepts are rather simple:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Write tests&lt;/li&gt;
+  &lt;li&gt;Run the tests&lt;/li&gt;
+  &lt;li&gt;Write/refactor code to make the tests pass&lt;/li&gt;
+  &lt;li&gt;Repeat.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This might seems a little backward, but the tests are actually guidlines to help us focus on the desired behaviors that are intended especially if the tests are developed and written after the rules and examples from earlier deliberate discovery step.&lt;/p&gt;
+
+&lt;p&gt;In my experience, having tests before writing code reduce testing time and effort, because the data is already set up and I can just target the test I want then let it run without me having to manually navigate and click on the UI.&lt;/p&gt;
+
+&lt;p&gt;Nowadays a lot of frameworks support TDD and provide excellent test suits which allow developers to write tests that are easy to read and close to natural language. If you are using Ruby on Rails, &lt;code class=&quot;highlighter-rouge&quot;&gt;rspec&lt;/code&gt; is an excellent &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt; for writing tests that are very easy to understand.&lt;/p&gt;
+
+&lt;h2 id=&quot;all-in-all&quot;&gt;All in all&lt;/h2&gt;
+
+&lt;p&gt;BBD perfectly points out the reasons why I had such a rememberable Friday and has the solutions to offer. Another benefit that I can see which was not mention is that by deliverately discoverying the problem domain allows you to see more clearly what and how long it takes to solve the problem.&lt;/p&gt;
+
+&lt;p&gt;Of course it would be meaningless if we don’t put any of this into action. If you have been through what I have, then why not try this out for yourself. Use this blog as a guidline or any other source that fits you best and apply BDD to the next few task/stories.&lt;/p&gt;
+
+&lt;p&gt;Here is to become a better developer.&lt;/p&gt;
+
+&lt;p&gt;Cheers!&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 Mar 2019 00:00:00 +0700</pubDate>
+        <link>/2019/03/24/reduce-rework-bdd/</link>
+        <guid isPermaLink="true">/2019/03/24/reduce-rework-bdd/</guid>
+        
+        
+        <category>dev</category>
+        
+        <category>thoughts</category>
+        
+      </item>
+    
+      <item>
+        <title>Unit Test NodeJS</title>
+        <description>&lt;p&gt;Testing is an important aspect of software development. Testing helps to improve the code quality and reduce bugs introduced into the system.&lt;/p&gt;
+
+&lt;p&gt;There are many types of tests that can be performed on a software, but the one that developers need to deal with most of the times is unit testing .&lt;/p&gt;
+
+&lt;p&gt;Unit tests are often written by developers to test their own code. This type of test targets very small amount of code to test such as a functionin isolation for each test.&lt;/p&gt;
+
+&lt;p&gt;Test Driven Development (TTD) was introduced to enforce strict testing process during development. TDD is summarized nicely by &lt;a href=&quot;https://thejsguy.com/&quot;&gt;David Tang&lt;/a&gt;
+ as:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Write a test and watch it fail&lt;/li&gt;
+    &lt;li&gt;Write the minimal amount of code to make that test pass&lt;/li&gt;
+    &lt;li&gt;Repeat&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Two parts article on &lt;a href=&quot;https://www.codementor.io/&quot;&gt;codementor&lt;/a&gt; about TDD, unit testing with NodeJS can be found here:
+&lt;a href=&quot;https://www.codementor.io/davidtang/unit-testing-and-tdd-in-node-js-part-1-8t714s877&quot;&gt;Part 1&lt;/a&gt;
+&lt;a href=&quot;https://www.codementor.io/nodejs/tutorial/unit-testing-tdd-node-js-nockjs-part-2&quot;&gt;Part 2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The articles covered the useful tools to support TDD and unit tests such as Mocha, Chai, and Nock.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 30 May 2018 00:00:00 +0700</pubDate>
+        <link>/2018/05/30/tdd-nodejs/</link>
+        <guid isPermaLink="true">/2018/05/30/tdd-nodejs/</guid>
+        
+        
+        <category>dev</category>
+        
+      </item>
+    
+      <item>
+        <title>Selection sort</title>
+        <description>&lt;h3 id=&quot;the-concepts&quot;&gt;The Concepts&lt;/h3&gt;
+
+&lt;p&gt;Selection sort is a technique used to sort a sequence of items/numbers/etc.&lt;/p&gt;
+
+&lt;p&gt;This technique is rather simple. Sorting an array of random numbers is one good way to demonstrate selection sort.&lt;/p&gt;
+
+&lt;p&gt;Given an array of random numbers as below:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, 12, 5, -1, 43, 0, 64, 65, 1, -3]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For each iteration, the smallest element is chosen and move to the beginning of the array.&lt;/p&gt;
+
+&lt;p&gt;Linear search algorithm can be used to find the smallest element of the array.&lt;/p&gt;
+
+&lt;p&gt;In the first iteration, -3 is found to be the smallest elements. Therefore, -3 will be swapped to the first position of the array (index 0).&lt;/p&gt;
+
+&lt;p&gt;The array now looks like this:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;[-3, 2, 12, 5, -1, 43, 0, 64, 65, 1, 4]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For the next iteration, we only need to start at index 1 of the array and look forward to find the next smallest element.&lt;/p&gt;
+
+&lt;p&gt;When the next smallest element is found, it will be swapped for index 1 position of the array.&lt;/p&gt;
+
+&lt;p&gt;-1 is the next smallest element of the array, so will be swapped to index 1 and the array will look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[-3, -1, 12, 5, 2, 43, 0, 64, 65, 1, 4]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;We will repeat the same process for all other elements of the array.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-code&quot;&gt;The code&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * [selectionSort selection sort algorithm so sort elements of an array]
+ * @param  {[array]} array [array numbers to sort]
+ * @return {[array]}       [sorted array]
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;selectionSort&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;linearSearch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;The code will loop through the array starting at index 0. Variable ‘i’ is used to keep track of where linear search should begins in the array.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Each iteration will find the smallest element of the array, then we will compare the smallest element with the element at index i.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;linearSearch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;We will swap ‘array[i]’ for ‘min’ then repeat the same process with the next index of the array.&lt;/p&gt;
+
+&lt;p&gt;Linear search code can be found below:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * [linearSearch linear search to find smallest value inside an array]
+ * @param  {[number]} index [starting index]
+ * @param  {[array]} array [array to search]
+ * @return {[number]}       [smallest value of the array]
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;linearSearch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Swapping logics can be found below:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * [swap swap values of 2 elements of an array]
+ * @param  {[number]} a     [array element value]
+ * @param  {[number]} b     [array element value]
+ * @param  {[array]} array [array for swapping]
+ * @return {[array]}       [swapped array]
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;swap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tempA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tempIndexA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tempB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tempIndexB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tempIndexA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tempB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tempIndexB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tempA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;the-big-oh-o&quot;&gt;The Big Oh :O&lt;/h3&gt;
+&lt;p&gt;Selection sort seems to have the complexity of O(n^2) because 2 loops are needed to sort the array.&lt;/p&gt;
+
+&lt;p&gt;That’s it for now. Until next time :)&lt;/p&gt;
+</description>
+        <pubDate>Tue, 29 May 2018 00:00:00 +0700</pubDate>
+        <link>/2018/05/29/selection-sort/</link>
+        <guid isPermaLink="true">/2018/05/29/selection-sort/</guid>
+        
+        
+        <category>algorithm</category>
+        
+      </item>
+    
+      <item>
+        <title>Bubble sort</title>
+        <description>&lt;h3 id=&quot;the-concepts&quot;&gt;The Concepts&lt;/h3&gt;
+
+&lt;p&gt;Bubble sort is a sorting technique used on a sequence of items/numbers/etc.&lt;/p&gt;
+
+&lt;p&gt;Imagine a glass of champagne with bubbles rising from the bottom to the top of the glass :)&lt;/p&gt;
+
+&lt;p&gt;Imagine you are the bubble God. Your job is to determine which bubble should rise to the surface before the other.&lt;/p&gt;
+
+&lt;p&gt;The divine rule is lighter elements should rise before the heavier ones.&lt;/p&gt;
+
+&lt;p&gt;A divine scale is your tool complete these tasks.&lt;/p&gt;
+
+&lt;p&gt;Sorting an array with random numbers representing bubbles with different weights is one good way to demonstrate bubble sort.&lt;/p&gt;
+
+&lt;p&gt;Given an array of numbers:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, 12, 5, -1, 43, 0, 64, 65, 1, -3]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Imagine a scale starting from the end of the array weighting the last two elements 1 and -3.&lt;/p&gt;
+
+&lt;p&gt;If the element on the right side of the scale is ‘lighter’/less than the element on the left, the ‘lighter’ element will be moved to the right of the scale.&lt;/p&gt;
+
+&lt;p&gt;Therefore, the array will now looks like this:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, 12, 5, -1, 43, 0, 64, 65, -3, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The scale now move further left of the array to ‘weight’ 65 and -3.&lt;/p&gt;
+
+&lt;p&gt;Similarly, since -3 is ‘lighter’ than 65, -3 is again move to the right.&lt;/p&gt;
+
+&lt;p&gt;Therefore, the array will now looks like this:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, 12, 5, -1, 43, 0, 64, -3, 65, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The ‘weighting’ process will continue until the scale reached the far left of the array (index 0).&lt;/p&gt;
+
+&lt;p&gt;After the first iteration through the array, the ‘lightest’ element will be at index 0 of the array.&lt;/p&gt;
+
+&lt;p&gt;The weighting process will continue through the steps:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, 12, 5, -1, 43, 0, 64, -3, 65, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, 12, 5, -1, 43, 0, -3, 64, 65, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, 12, 5, -1, 43, -3, 0, 64, 65, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, 12, 5, -1, -3, 43, 0, 64, 65, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, 12, 5, -3, -1, 43, 0, 64, 65, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, 12, -3, 5, -1, 43, 0, 64, 65, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, 2, -3, 12, 5, -1, 43, 0, 64, 65, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[4, -3, 2, 12, 5, -1, 43, 0, 64, 65, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, the lightest element is at the beginning (index 0) of the array.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;[-3, 4, 2, 12, 5, -1, 43, 0, 64, 65, 1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The scale will now move the end of the array, and repeat the process until next ‘lightest’ element is put next the ‘lightest’ element found previously.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-code&quot;&gt;The Code&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * [bubleSort do buble sort in an array]
+ * @param  {[array]} array [unsorted array]
+ * @return {[array]}       [sorted array]
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bubleSort&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rightIndex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;leftIndex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rightIndex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;rightIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;leftIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;rightIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;leftIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;rightIndex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;rightIndex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;leftIndex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;It is important to stop at the correct index (index 0) for the code to work, so:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;javascript
+if (rightIndex !== 0) {
+  rightIndex--;
+  leftIndex--;
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Another thing to notice is for the inner loop, you don’t need to go further than index i because beyond that is already the ‘lighter’ element for sure.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;javascript
+for (let x = i; x &amp;lt; array.length; x++)
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Swap function is defined as below:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;javascript
+/**
+ * [swap swap left and right values]
+ * @param  {[number]} right [right value]
+ * @param  {[number]} left  [left value]
+ * @param  {[array]} array [array which contains right and left values]
+ * @return {[type]}       [no return]
+ */
+let swap = (right, left, array) =&amp;gt; {
+  let tempRight = array[array.indexOf(right)];
+  let tempIndexRight = array.indexOf(right);
+  let tempLeft = array[array.indexOf(left)];
+  let tempIndexLeft = array.indexOf(left);
+  array[tempIndexRight] = tempLeft;
+  array[tempIndexLeft] = tempRight;
+};
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-big-oh-o&quot;&gt;The Big Oh :O&lt;/h3&gt;
+&lt;p&gt;Bubble sort seems to be O(n^2) in complexity since there are two for loops involved to sort the elements.&lt;/p&gt;
+
+&lt;p&gt;That’s it for now. Until next time :)&lt;/p&gt;
+</description>
+        <pubDate>Mon, 28 May 2018 00:00:00 +0700</pubDate>
+        <link>/2018/05/28/bubble-sort/</link>
+        <guid isPermaLink="true">/2018/05/28/bubble-sort/</guid>
+        
+        
+        <category>algorithm</category>
+        
+      </item>
+    
+      <item>
+        <title>hello, there!</title>
+        <description>&lt;p&gt;My name is Minh.&lt;/p&gt;
+
+&lt;p&gt;I’m into web development, crypto currency, travel, and having a good time :).
+This is the place where I keep my notes and thoughts about the ‘stuff’ that I have been doing.
+Doing this is going to be beneficial to my future self because I normally have them ‘How the f*** did I do that?’ moments.
+Hopefully though, these notes will also be of some use for you guys out there.&lt;/p&gt;
+
+&lt;p&gt;I will see you all later :)&lt;/p&gt;
+</description>
+        <pubDate>Tue, 08 May 2018 00:00:00 +0700</pubDate>
+        <link>/2018/05/08/hello-world/</link>
+        <guid isPermaLink="true">/2018/05/08/hello-world/</guid>
+        
+        
+        <category>announcement</category>
+        
+      </item>
+    
+  </channel>
+</rss>
