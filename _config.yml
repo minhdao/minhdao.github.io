@@ -2,6 +2,7 @@ title: Minh's notes
 description: Personal notes about tech topics and more. Also great if these notes can help anyone in one way or the other :)
 
 url: https://minhdao.github.io
+resume: https://drive.google.com/file/d/1QukRJ_vZFMe7CfE-IBdCzn2Xdu1ZPXoo/view?usp=sharing
 paginate_path: "blog/page:num/"
 permalink: blog/:title/
 
