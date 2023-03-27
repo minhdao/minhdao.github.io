@@ -5,8 +5,6 @@ date: 2018-05-30
 categories:
   - dev
 description:
-image: https://picsum.photos/2000/1200?image=111
-image-sm: https://picsum.photos/500/300?image=111
 ---
 Testing is an important aspect of software development. Testing helps to improve the code quality and reduce bugs introduced into the system.
 

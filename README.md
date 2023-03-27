@@ -1,3 +1,1 @@
-My personal blog.
-Mainly used as a place to keep my notes and other stuff :)
-Powered by Jekyll. Theme 'Trophy' by Thomas https://github.com/thomasvaeth/trophy-jekyll.
+This place is where I keep my thoughts and notes related to tech and many more things. While the content on this site is not meant for teaching purpose, I hope that it can also be useful for others.

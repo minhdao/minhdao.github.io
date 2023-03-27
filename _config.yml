@@ -1,35 +1,35 @@
-# Site settings
-email: minhdao@gmail.com
-baseurl: ""
-paginate: 5
-paginate_path: "/blog/page-:num"
-google_analytics:
+title: Minh's notes
+description: Personal notes about tech topics and more. Also great if these notes can help anyone in one way or the other :)
 
-# SEO settings
-title: minh's notes
-description: where my thoughts are
-url: ""
-twitter_username:
-default_img:
+url: https://minhdao.github.io
+paginate_path: "blog/page:num/"
+permalink: blog/:title/
 
-# Profile settings
-name: Minh Dao
-profile_img: /assets/pics/me.jpg
-profile: Minh is into web development and crypto currency. Living in Ho Chi Minh City, Viet Nam. All time learner and player :)
-social:
-  github: https://github.com/minhdao
-  linkedin: https://www.linkedin.com/in/minh-dao-b635a056/
-  instagram: https://www.instagram.com/minhdao6/
+# Header Option
+# header: large
 
-# Build settings
-include: ["category"]
-exclude: ["_screenshots", "Gemfile", "Gemfile.lock", "LICENSE.txt", "README.md"]
-markdown: kramdown
-permalink: /:year/:month/:day/:title/
-
-# Sass
 sass:
-  style: compressed
+    style: compressed
 
-# Gems
-gems: [jekyll-paginate, jekyll-sitemap, octopress-autoprefixer]
+markdown: kramdown
+highlighter: rouge
+plugins: [jekyll-paginate]
+paginate: 5
+
+navigation:
+    - title: about
+      url: /about
+    - title: notes
+      url: /index.html
+    - title: contact
+      url: /contact
+
+social:
+    github: minhdao
+    email: minhdao6@gmail.com
+    linkedin: minh-dao-b635a056
+
+google_analytics: "UA-58263416-1"
+
+disqus:
+    shortname: brianmaierjr

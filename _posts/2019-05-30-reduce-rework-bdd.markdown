@@ -6,8 +6,6 @@ categories:
   - dev
   - thoughts
 description:
-image: https://picsum.photos/2000/1200?image=99
-image-sm: https://picsum.photos/500/300?image=99
 ---
 Feeling tired of redoing a same task many times? This post might help you.
 
