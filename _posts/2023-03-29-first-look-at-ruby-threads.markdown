@@ -7,7 +7,7 @@ categories:
 description: A first look at threads in Ruby. What are they? When and how to use them? Where to go from here?
 ---
 
-Sometimes ago a came accross a blog post from Thoughbot about Ruby threads. The full blog post can be found [here](https://thoughtbot.com/blog/untangling-ruby-threads#%C2%A0an-example-performing-http-requests-concurrently). This note is a shorten version of the original blog post with a clearer code examples.
+Sometimes ago a came accross a great blog post from Thoughbot about Ruby threads. The full blog post can be found [here](https://thoughtbot.com/blog/untangling-ruby-threads#%C2%A0an-example-performing-http-requests-concurrently). This note is a shorten version of the original blog post with a clearer code examples.
 
 Before looking into threads, we need to have some high level understanding of MRI and Global Interpreter Lock.
 
