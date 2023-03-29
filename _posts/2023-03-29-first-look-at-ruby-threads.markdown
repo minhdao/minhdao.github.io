@@ -17,7 +17,7 @@ Another famous Ruby flavor is JRuby which provides a completely different thread
 
 When looking into threads in Ruby, it is important to know which underlying interpreter is present.
 
-## MRI (Matz's Ruby Integreter) Ruby
+## MRI (Matz's Ruby Intepreter) Ruby
 MRI comes with a Global Interpreter Lock (a.k.a GIL). The GIL prevents multiple Ruby threads from executing at the same time. In short, **MRI does not truly provide a multi-threaded environment** for your Ruby code to run. This means no matter how many CPU cores you have, or how many threads to spawn, the threads will never be executed concurrently.
 
 ### How does “multi-threaded” work in MRI Ruby?
