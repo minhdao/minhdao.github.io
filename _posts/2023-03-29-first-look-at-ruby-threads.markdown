@@ -44,7 +44,7 @@ It is resonably simple to demo threads in action with the simple code below.
 require 'benchmark'
 
 def query_one
-  sleep 5
+  sleep 1
 end
 
 def query_two
@@ -52,7 +52,7 @@ def query_two
 end
 
 def query_three
-  sleep 1
+  sleep 5
 end
 
 # methods called in sequence
