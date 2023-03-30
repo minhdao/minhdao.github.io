@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Ruby Memory management and fragmentation"
-date: 2023-03-29
+date: 2023-03-30
 categories:
   - ruby
 description: A look into how Ruby manages memory. What is memory fragmentation? What causes in Ruby?
