@@ -4,7 +4,7 @@ title: "Ruby Memory management and fragmentation"
 date: 2023-03-30
 categories:
   - ruby
-description: A look into how Ruby manages memory. What is memory fragmentation? What causes in Ruby?
+description: A look into how Ruby manages memory. What is memory fragmentation? What are the causes of fragmentation in Ruby?
 ---
 
 A while ago I read a great post about memory fragmentation issues in multithreaded Ruby programs from Speed Shop. The post went through many different aspects of Ruby memory management and causes of fragmentation. It was a tough read, but also lots of fun. The full post can be found [here](https://www.speedshop.co/2017/12/04/malloc-doubles-ruby-memory.html)
