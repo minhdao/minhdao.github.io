@@ -94,3 +94,7 @@ The picture below shows that only around 15% of fragmentation is inside the Obje
 Memory fragmentation is an issue for the Ruby language. The cause of this issue is mainly because of the `malloc` calls outside the Object Space without any guarantee of contiguity. Furthermore, once created these memory areas are pretty much set in stone to maintain correct position in the memory so the pointers can be used correctly.
 
 The picture below tries to capture the ideal of Ruby memory allocation inside and outside Object Space. We can see that the actual `malloc` calls to the allocator to create a memory space for the oversize objects are likely the cause of fragmentation.
+
+![memory_management](https://cdn.discordapp.com/attachments/1090947545477427264/1090953839043149956/image.png)
+
+Being aware of this knowledge, we can be more mindful and try to avoid fragmentation where possible in the code. It also helps to understand the more serious fragmentation issues in multithreaded Ruby programs.
