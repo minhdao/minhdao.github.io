@@ -7,6 +7,8 @@ categories:
 description: A high level view and some key concepts when starting to work on a Shopify app
 ---
 
+A full documentation link can be found here: `https://shopify.dev/docs/apps/getting-started`
+
 ### What’s the purpose of a Shopify app?
 * Extends functionality of Shopify
 * Add more features or improve some existing features (e.g. Custom checkout flow)
