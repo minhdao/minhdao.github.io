@@ -11,6 +11,8 @@ Have some understanding about indexes might help you optimize and improve the sp
 
 In this video Hussein explains about indexes and some bad pratices to avoid when writing queries. `https://www.youtube.com/watch?v=-qNSXK7s7_w`
 
+This note captures the key points discussed in the video.
+
 ## What is indexes?
 
 An analogy is a yellow page phone book. Even though the phone book is really big and thick, you do not need to go to every contact in the book to find the contact you want. You can go to the category where your contact is likely to be located, then further narrow it down (maybe by using the phone book lexical ordering) until you can pinpoint the location of your contact.
