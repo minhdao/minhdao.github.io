@@ -4,14 +4,16 @@ title: "Database indexes"
 date: 2023-04-08
 categories:
   - database
-description: Datbase tables grow overtime. What makes querying from huge tables faster?
+description: Database tables grow overtime. How to reduce query time?
 ---
 
 Have some understanding about indexes might help you optimize and improve the speed of your query.
 
-In this video Hussein explains about indexes and some bad pratices to avoid when writing queries. `https://www.youtube.com/watch?v=-qNSXK7s7_w`
+In this video Hussein explains about indexes and some bad pratices to avoid when writing queries. 
 
-This note captures the key points discussed in the video.
+`https://www.youtube.com/watch?v=-qNSXK7s7_w`
+
+This note captures the key points discussed in the video. On top of that, some more disadvantages of indexing is also added for consideration.
 
 ## What is indexes?
 
